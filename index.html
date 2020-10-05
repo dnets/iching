@@ -6,7 +6,20 @@
     <title>И-Цзин</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="icon" type="image/png" href="icon.png" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
+      .fixed-top .btn {
+        background: #fffffa !important;
+        border: #ffffff !important;
+      }
+      .fixed-top .btn:hover {
+        background: #e9d66b !important;
+        border: #e9d66b !important;
+      }
+      .material-icons {
+        float: left;
+        padding-right: 5px;
+      }
       body {
         background-image: url("https://source.unsplash.com/random/1900x1200/?amanita");
       }
@@ -20,14 +33,20 @@
       .card-body {
         box-shadow: 5px 5px 5px rgba(0, 0, 0, .60);
       }
-
     </style>
+
 </head>
 <body>
 
 <div class="container-fluid pt-3">
 
 <div id="root">
+  <div class="mb-3">
+    <button type="button" class="btn btn-light" @click="resetHexagram()">
+      <i class="tiny material-icons">autorenew</i>
+      Cбросить
+    </button>
+  </div>
 <div class="row">
 <div class="col-3">
 <div class="card text-center">
@@ -1052,7 +1071,7 @@ crossorigin="anonymous"></script>
                 '6': 'Обладай правдой, когда пьешь вино. Хулы не будет. (Если) помочишь голову, обладая правдой, потеряешь это.'
               }
             },
-            },
+          },
           hexagram: {
               first: 7,
               second: 7,
@@ -1123,6 +1142,18 @@ crossorigin="anonymous"></script>
             else if (current == 9) next = 7
             this.hexagram[line] = next;
             this.changeHexagram();
+            this.reverseHexagram();
+            this.nuclearHexagram();
+          },
+          resetHexagram() {
+            this.hexagram['first'] = 
+            this.hexagram['second'] = 
+            this.hexagram['third'] = 
+            this.hexagram['fourth'] = 
+            this.hexagram['fifth'] = 
+            this.hexagram['sixth'] = 7
+            this.changeHexagram();
+            this.reverseHexagram();
             this.nuclearHexagram();
           },
           changeHexagram() {
@@ -1131,7 +1162,6 @@ crossorigin="anonymous"></script>
               if (this.hexagram[k] == 6) this.hexagramChanged[k] = 7
               else if (this.hexagram[k] == 9) this.hexagramChanged[k] = 8
             }
-            this.reverseHexagram();
           },
           reverseHexagram() {
             this.hexagramReverse = {...this.hexagram};
